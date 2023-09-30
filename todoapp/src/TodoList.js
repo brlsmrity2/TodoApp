@@ -4,26 +4,26 @@ import './Styles.css'
 
 
 export default class TodoList extends React.Component{
-
-    state ={
-        list_title:"",
-        current_value:"",
-        todos:[]
-        // [
-        //     {
-        //         title:"Go Gym",
-        //         completed : false
-        //     },
-        //     {
-        //         title:"Go Shopping",
-        //         completed : false
-        //     },
-        //     {
-        //         title:"Go yoga",
-        //         completed : true
-        //     }
-        // ]
+    constructor(){
+        super()
+        this.state ={
+            list_title:"",
+            current_value:"",
+            todos:[]
+        }
+        this.deleteTodoByIndex = this.deleteTodoByIndex.bind(this)
     }
+
+    deleteTodoByIndex(index) {
+        this.setState(prevState => ({
+            todos: [
+                ...prevState.todos.slice(0, index),
+                ...prevState.todos.slice(index + 1)
+            ]
+        }));
+    }
+    
+
     render() {
         return (
           <div className="todo-list">
@@ -39,8 +39,14 @@ export default class TodoList extends React.Component{
               }}
             />
             <br />
-            {this.state.todos.map(todo => {
-              return <TodoListItem title={todo.title} completed={todo.completed} />;
+            {this.state.todos.map((todo,index) => {
+              return (
+              <TodoListItem
+               key={index}
+               index={index}
+               deleteTodoByIndex={this.deleteTodoByIndex}
+               title={todo.title} 
+               completed={todo.completed} />)
             })}
             <input 
             placeholder="To do Item.."
