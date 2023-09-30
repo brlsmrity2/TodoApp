@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 const TodoListItems=(props)=>{
-    console.log(props)
         return (
             <div>
                 <input type="checkbox" checked={props.completed}/>
