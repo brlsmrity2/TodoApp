@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 
-const TodoListItems=()=>{
+const TodoListItems=(props)=>{
+    console.log(props)
         return (
             <div>
-                Todo List Item
+                <input type="checkbox" checked={props.completed}/>
+                <span> {props.title} </span>
+                <button>Delete Todo Items</button>
             </div>
         )
     }
